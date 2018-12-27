@@ -1,0 +1,11 @@
+python+Django 实现 Nagios 自动化添加监控项目
+整个过程可以分为三部分。
+
+cmdb 端:主要用来实现对数据的收集，采用两个 API，一个是提供给客户机的 API。用于将客户端的数据上传的 cmdb 服务器；另外一 个 API 是 nagios 通过此 API 可以得到要监控主机的信息，然后对该信息进行整理，做成 nagios 监控模板。
+Client 端：通过 Python 脚本收集本机器要监控的软硬件信息，然后通过 cmdb 端提供的 API 接口将数据上传到 cmdb 端的数据库。
+Nagios 端：通过 cmdb 端提供的 API 接口实现对 cmdb 收集到的信息进行抓取，然后将数据写入到模板，最后 copy 到 naigos 指定的 objects 目录，最终实现对客户机的监控。
+这三部分最重要的应该是 CMDB 端。接下来通过安装 django 和编写 API 接口实现 cmdb 可以正常工作。可以将 cmdb 端分为三个步骤来完成：
+
+安装 django
+配置 django
+编写 API 接口
